@@ -100,7 +100,7 @@ test.describe('Practice04 GitHub HomePage', () => {
         await test.step('3.	Validate that there are 6 links are displayed in the footer', async() => {
             const footerLinkCount = await gitHubLoginPage.footerLinks.count()
             // console.log(footerLinkCount)
-            await expect(footerLinkCount).toEqual(6) // do we not need await for .toEqual()??
+            expect(footerLinkCount).toEqual(6) // we do not need await before expect because footerLinks returns an integer and then this assertion becomes synchronous
         });
 
         await test.step('4.	Validate that the footer links are displayed with their expected texts', async() => {
