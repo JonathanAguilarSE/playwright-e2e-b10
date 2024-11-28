@@ -51,9 +51,9 @@ test.describe('Practice04 GitHub HomePage', () => {
         });
 
         await test.step(`
-            5.	Validate that the username or email address label is displayed with the text "Username or email address
-            6.	Validate that the username or email address input is displayed and enabled
-            7.	Validate that the password label is displayed with the text "Password"
+            5.	Validate that the username or email address label is displayed with the text "Username or email address",
+            6.	Validate that the username or email address input is displayed and enabled,
+            7.	Validate that the password label is displayed with the text "Password",
             8.	Validate that the password input is displayed and enabled`, async() => {
             const inputLabelsArr = [ 'Username or email address', 'Password' ]
             const labelsArr = await gitHubLoginPage.userAndPassLabel.all()
@@ -100,7 +100,7 @@ test.describe('Practice04 GitHub HomePage', () => {
         await test.step('3.	Validate that there are 6 links are displayed in the footer', async() => {
             const footerLinkCount = await gitHubLoginPage.footerLinks.count()
             // console.log(footerLinkCount)
-            expect(footerLinkCount).toEqual(6) // do we not need await for .toEqual()??
+            await expect(footerLinkCount).toEqual(6) // do we not need await for .toEqual()??
         });
 
         await test.step('4.	Validate that the footer links are displayed with their expected texts', async() => {
@@ -121,8 +121,8 @@ test.describe('Practice04 GitHub HomePage', () => {
         });
 
         await test.step(`
-            3. Enter "johndoe" to the username or email address input
-            4. Enter "test1234" to the password input
+            3. Enter "johndoe" to the username or email address input,
+            4. Enter "test1234" to the password input,
             5. Click on "Sign in" button`, async() => {
             await gitHubLoginPage.userLogin('johndoe', 'test1234')
         });
