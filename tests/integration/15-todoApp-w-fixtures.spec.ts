@@ -1,26 +1,12 @@
-import test from "@playwright/test";
-import { TodoPage } from "../../pages/TodoPage";
+import { test } from "../../fixtures/todo-fixtures"
 
 test.describe('todo tests', () => {
-  let todoPage: TodoPage
 
-  test.beforeEach(async({ page }) => {
-    todoPage = new TodoPage(page)
-    await todoPage.goto()
-
-    await todoPage.addTodo('item1')
-    await todoPage.addTodo('item2')
-  })
-
-  test('Should add an item', async () => {
+  test('Should add an item', async ({ todoPage }) => {
     await todoPage.addTodo('My Item')
   })
 
-  test('Should remove an item', async () => {
+  test('Should remove an item', async ({ todoPage }) => {
     await todoPage.remove('item1')
-  })
-
-  test.afterEach(async() => {
-    await todoPage.removeAll()
   })
 })
