@@ -12,7 +12,11 @@ dotenv.config({ path: path.resolve(__dirname, '.env') });
  * See https://playwright.dev/docs/test-configuration.
  */
 export default defineConfig({
+  timeout: 10000,
   testDir: './tests',
+  snapshotDir: './snapshots',
+  // globalSetup: 'tests/setup/global.setup.ts',
+  // globalTeardown: '/',
   /* Run tests in files in parallel */
   fullyParallel: true,
   /* Fail the build on CI if you accidentally left test.only in the source code. */
@@ -23,13 +27,13 @@ export default defineConfig({
   workers: process.env.CI ? 1 : undefined,
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
   expect: {
-    timeout: 5 * 1000
+    timeout: 5 * 1000,
   },
   reporter: [
     ['html', { open: 'never' }],
     ['list'],
-    // ['json', { outputFile: 'jsonReports/reports.json' }],
-    // ['junit', { outputFile: 'junitReports/reports.xml' }]
+    // ['json', { outputFile: 'jsonReports/reports.json'}]
+    // ['junit', { outputFile: 'junitReports/reports.xml'}]
   ],
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
@@ -37,18 +41,49 @@ export default defineConfig({
     baseURL: process.env.BASE_URL,
 
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
-    trace: 'on-first-retry',
-    headless: false,
+    trace: 'on',
+    headless: true,
+    // launchOptions: {
+    //   slowMo: 300
+    // }
+    // storageState: './user-data/loginAuth.json'
   },
 
   /* Configure projects for major browsers */
   projects: [
     {
       name: 'chromium',
-      use: {
+      use: { 
         ...devices['Desktop Chrome'],
-        viewport: { width: 1920, height: 1080}
-      },
+        viewport: { width: 1920, height: 1080 },
+       },
+    },
+
+    {
+      name: 'setup',
+      testMatch: /global\.setup\.ts/,
+      teardown: 'teardown'
+    },
+
+    {
+      name: 'teardown',
+      testMatch: /global\.teardown\.ts/,
+      use: { 
+        ...devices['Desktop Chrome'],
+        viewport: { width: 1920, height: 1080 },
+        storageState: './user-data/loginAuth.json'
+       },
+    },
+
+    {
+      name: 'loggedIn',
+      testMatch: '**/17-globalSetup.spec.ts',
+      dependencies: ['setup'],
+      use: { 
+        ...devices['Desktop Chrome'],
+        viewport: { width: 1920, height: 1080 },
+        storageState: './user-data/loginAuth.json'
+       },
     },
 
     // {
