@@ -46,7 +46,7 @@ test.describe("First Test Suite", () => {
 
     await page.goto("https://www.techglobal-training.com/");
 
-    const myLogo: Locator = page.locator('#lskdnflksankldnas')
+    const myLogo: Locator = page.locator('#logo')
 
     // await page.click('#asdasdsad')
     await myLogo.click()

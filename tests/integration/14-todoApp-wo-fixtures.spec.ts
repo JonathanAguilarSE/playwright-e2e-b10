@@ -16,6 +16,8 @@ test.describe('todo tests', () => {
     todoPage = new TodoPage(page)
     await todoPage.goto()
 
+    // await page.pause()
+
     await todoPage.addTodo('item1')
     await todoPage.addTodo('item2')
   })

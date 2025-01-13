@@ -1,0 +1,23 @@
+{
+    "newStudent": {
+        "DOB": "1990-01-01",
+        "EMAIL": "jonag@gmail.com",
+        "FIRST_NAME": "Jon",
+        "LAST_NAME": "Ag",
+        "INSTRUCTOR_ID": 2
+    },
+    "updatedStudent": {
+        "DOB": "2000-01-01",
+        "EMAIL": "updatedjonag@gmail.com",
+        "FIRST_NAME": "updatedJon",
+        "LAST_NAME": "updatedAg",
+        "INSTRUCTOR_ID": 1
+    },
+    "updatedStudentForProjectAPI": {
+        "DOB": "1990-01-01",
+        "EMAIL": "jonag@gmail.com",
+        "FIRST_NAME": "Jon",
+        "LAST_NAME": "Ag",
+        "INSTRUCTOR_ID": 1
+    }
+}
